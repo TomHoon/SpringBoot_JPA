@@ -5,11 +5,23 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
+import java.time.LocalDateTime;
 
 @Entity // 엔티티로 지정
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Article {
+
+    @CreatedDate // 엔티티가 생서될 때 생성 시간 저장
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @LastModifiedDate
+    @Column(name ="updated_at")
+    private LocalDateTime updatedAt;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

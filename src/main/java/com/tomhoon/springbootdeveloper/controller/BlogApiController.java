@@ -11,7 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -49,10 +51,11 @@ public class BlogApiController {
     }
 
     @DeleteMapping("/api/articles/{id}")
-    public ResponseEntity<Void> deleteArticle(@PathVariable long id) {
+    public ResponseEntity<Map<String, Object>> deleteArticle(@PathVariable long id) {
         blogService.delete(id);
-        return ResponseEntity.ok()
-                .build();
+        Map<String, Object> map = new HashMap<>();
+        map.put("replaceUrl", "articles");
+        return ResponseEntity.ok(map);
     }
 
     @PutMapping("/api/articles/{id}")
